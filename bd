@@ -1,0 +1,43 @@
+usuario
+	idusuario serial NOT NULL,
+	usuario character varying(255) NOT NULL,
+  	password character varying(255) NOT NULL,
+  	nombre character varying(255),
+  	email character varying(255),
+  	telefono character varying(11),
+  	identificador integer (CEdula RIF)
+  	ubicacion (Estado)
+  	fecharegistro date NOT NULL,
+  	ultimamodificacion time without time zone,
+	ultimoingreso time without time zone,
+  	tipousuario
+  	estatus integer, -- 0 = Activo 1= Baneado
+  	salt
+
+medicamento
+	idmedicamento
+	nombremedicamento
+	descripcion
+	presentacion
+	unidad (Ml,mg,cc)
+	labortorio
+	principio_activo
+	tratamiento_para (Asociar medicamentos con ciertas patologias para hacer seguimiento a usuarios)
+	requiere_recipe
+	fecha_vencimiento
+
+publicacion
+	idpublicacion
+	idusuario
+	idmedicamento
+	tipo (requiere medicamento o dona)
+	alcance (1 km, 20 km)
+	descripcion
+	fecharegistro
+	estatus
+
+publicacion_reporte
+	idpublicacionreporte
+	idpublicacion
+	idusuarioreporta
+	descripcion
