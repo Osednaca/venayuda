@@ -236,7 +236,7 @@ function guardar()
 		return false;
 	}
 
-		$.blockUI({ css: { 
+/*		$.blockUI({ css: { 
 		     border: 'none', 
 		     padding: '15px', 
 		     backgroundColor: '#000', 
@@ -244,10 +244,10 @@ function guardar()
 		     '-moz-border-radius': '10px', 
 		     opacity: .5, 
 		     color: '#fff' 
-		 } }); 
+		 } }); */
 
 		$.post("donacion/donacion_datos.php",$("form").serialize(),function(resp){
-			var json = eval("(" + resp + ")");
+/*			var json = eval("(" + resp + ")");
 			setTimeout($.unblockUI); 
 			if(json.result==true)
 			{
@@ -256,7 +256,7 @@ function guardar()
 			}
 			else{
 				crear_dialog("Informaci&oacute;n",json.mensaje);
-			}
+			}*/
 		});
 
 }
