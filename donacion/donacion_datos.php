@@ -1,20 +1,24 @@
 <?php
+session_start();
 include_once("../includes/config.php");
 //==================> Variables
 $id_medicamento 			= $_REQUEST["id_medicamento"]; //==> En caso de que el medicamento este en el select
 /*---Si el medicamento no esta en el select estos campos deberian contener datos----*/
-$nombre_medicamento 		= $_REQUEST["nom_medicamento"];
-$descripcion_medicamento    = $_REQUEST["descripcion_medicamento"];
-$laboratorio_medicamento 	= $_REQUEST["lab_medicamento"];
-$principio_a_medicamento 	= $_REQUEST["pa_medicamento"];
+$nombre_medicamento 		= utf8_decode($_REQUEST["nom_medicamento"]);
+$descripcion_medicamento    = utf8_decode($_REQUEST["descripcion_medicamento"]);
+$laboratorio_medicamento 	= utf8_decode($_REQUEST["lab_medicamento"]);
+$principio_a_medicamento 	= utf8_decode($_REQUEST["pa_medicamento"]);
 /*---------------------------------------------------------*/
-$presentacion_medicamento   = $_REQUEST["pres_medicamento"];
+$presentacion_medicamento   = $_REQUEST["pres_medicamento"];           //==> Presentacion existente
+$new_presentacion           = utf8_decode($_REQUEST["new_present"]);   //==> Nueva presentacion
+
 $unidad_medicamento         = $_REQUEST["uni_medicamento"];
 $indica_recipe				= $_REQUEST["indica_rec"]; //===> "0" No indica, "1" Si indica
 $fecha_ven 					= $_REQUEST["fecha_ven"];
-$descripcion 				= $_REQUEST["desc"];
+$descripcion 				= utf8_decode($_REQUEST["desc"]);
 $tipo_publicacion 			= $_REQUEST["tipo_publicacion"];
 $fecharegistro              = date("Y-m-d");
+$idusuario                  = $_SESSION["idusuario"];
 
 //var_dump($_REQUEST);
 
@@ -22,7 +26,7 @@ $fecharegistro              = date("Y-m-d");
     if($presentacion_medicamento==""):
         $sql_presentacion = "INSERT INTO presentacion(presentacion) VALUES (?);";
         $query = $db->prepare($sql_presentacion);
-        $prepare = array($presentacion);
+        $prepare = array($new_presentacion);
         //var_dump($prepare); exit();
         $result = $query->execute($prepare);
         $idpresentacion = $db->lastInsertId('public.presentacion_idpresentacion_seq');
@@ -31,21 +35,25 @@ $fecharegistro              = date("Y-m-d");
     endif;
 	if($idmedicamento==""):
 		$sql_medicamento = "INSERT INTO medicamento(
-            nombremedicamento, descripcion, 
+            nombremedicamento, 
             laboratorio, principio_activo, requiere_recipe, 
             idusuario, fecharegistro, estatus)
-    		VALUES (?, ?, ?, 
-            ?, ?, ?, ?, ?, 
-            ?);";
-        //echo $sql; exit();
+    		VALUES (?, ?, 
+            ?, ?, ?, ?, ?);";
+        //echo $sql_medicamento; exit();
 		$query = $db->prepare($sql_medicamento);
-        $prepare = array($nombremedicamento,$descripcion_medicamento,$laboratorio_medicamento,$principio_a_medicamento,$indica_recipe,$idusuario,$fecha_registro,1);
+        $prepare = array($nombre_medicamento,$laboratorio_medicamento,$principio_a_medicamento,$indica_recipe,$idusuario,$fecharegistro,1);
         //var_dump($prepare); exit();
         $result = $query->execute($prepare);
-        if(!$result){
+        if(!$result)
+        {
         	$error = $db->errorInfo();
         	echo json_encode(array('result' => false,'mensaje' => "Hubo un error en la consulta. ".$error[2]));
-        }else{
+            //echo "Error".$error[2]; exit();
+        }
+        else
+        {
+            //echo "No Error"; exit();
             $idmedicamento = $db->lastInsertId('public.medicamento_idmedicamento_seq');
         }
 	endif;
