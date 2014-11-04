@@ -4,6 +4,7 @@ if(!empty($_SESSION["aut"]))
 {
 ?>
 <!--Registro de donacion-->
+<input type="hidden" id="tipo_publicacion" name="tipo_publicacion" value="2"> <!--Tipo donacion-->
 <div id="exito" class="alert alert-success" style="display:none;width:50%;margin:0 auto;margin-bottom:12px;" role="alert">¡Guardado exitosamente!</div>
 <div class="container" id="cont_est" name="cont_est" style="display:none;padding-top:80px;">		
 		<div class="panel panel-default" style="box-shadow:2px 2px 5px;margin:0 auto;margin-bottom:35px;">
@@ -84,7 +85,10 @@ if(!empty($_SESSION["aut"]))
 					<div class="form-group" id="div_um" style="display:;">
 						<label style="align:left;" class="col-sm-3 control-label">Unidad:</label>
 						<div class="col-xs-2">
-							<select class="form-control" id="uni_medicamento" name="uni_medicamento">
+							<input type="text" class="form-control" id="cant_uni" name="cant_uni" value="" data-container="body" data-toggle="popover" data-placement="right" data-content="Ingrese la cantidad de unidad del medicamento.">
+						</div>
+						<div class="col-xs-2">
+							<select class="form-control" id="uni_medicamento" name="uni_medicamento" data-container="body" data-toggle="popover" data-placement="right" data-content="Seleccione la unidad.">
 								<option value=""></option>
 								<option value="1">MG</option>
 								<option value="2">CC</option>
@@ -166,7 +170,7 @@ function guardar()
 	{
 		if($("#id_medicamento").val()=="")
 		{
-			$.growlUI('Seleccione el medicamento.');
+			$.growlUI('Seleccione el medicamento o ingrese uno nuevo.');
 			//$("#id_medicamento").popover("show");
 			return false;
 		}
@@ -192,8 +196,7 @@ function guardar()
 	{
 		if($("#new_present").val()=="")
 		{
-			$.growlUI('Seleccione la presentaci&oacute;n del medicamento.');
-			//$("#new_present").popover("show");
+			$("#new_present").popover("show");
 			return false;
 		}
 	}
@@ -201,10 +204,15 @@ function guardar()
 	{
 		if($("#pres_medicamento").val()=="")
 		{
-			$("#pres_medicamento").popover("show");
+			$.growlUI('Seleccione la presentaci&oacute;n del medicamento.');
 			return false;			
 		}
 	}
+		if($("#cant_uni").val()=="")
+		{
+			$("#cant_uni").popover("show");
+			return false;
+		}
 
 		if($("#uni_medicamento").val()=="")
 		{
@@ -239,7 +247,16 @@ function guardar()
 		 } }); 
 
 		$.post("donacion/donacion_datos.php",$("form").serialize(),function(resp){
+			var json = eval("(" + resp + ")");
 			setTimeout($.unblockUI); 
+			if(json.result==true)
+			{
+				$("#form1")[0].reset();
+				crear_dialog("Informaci&oacute;n",json.mensaje,"","rel");
+			}
+			else{
+				crear_dialog("Informaci&oacute;n",json.mensaje);
+			}
 		});
 
 }
