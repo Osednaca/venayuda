@@ -180,11 +180,6 @@ function guardar()
 			$("#nom_medicamento").popover("show");
 			return false;			
 		}
-		if($("#lab_medicamento").val()=="")
-		{
-			$("#lab_medicamento").popover("show");
-			return false;			
-		}
 		if($("#pa_medicamento").val()=="")
 		{
 			$("#pa_medicamento").popover("show");
