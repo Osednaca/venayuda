@@ -15,8 +15,13 @@
 		    <ul class="nav navbar-nav">
 		    <?if(empty($_SESSION["aut"])){?>
 		    	<li><a href="#" data-toggle="modal" data-target="#modal-sesion">Hacer donaci&oacute;n</a></li>
-		    <?}else{?>
+		    <?
+		    }
+		    else if($_SESSION["tipo"]!=0)
+		    {?>
 		    	<li><a href="index.php?va=1">Hacer donaci&oacute;n</a></li>
+		    <?}else{?>
+		    	<li><a href="index.php?va=2">Publicaciones pendientes</a></li>
 		    <?}?>
 				<li class="dropdown">
 				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Buscar<span class="caret"></span>
@@ -133,7 +138,7 @@
 		  </div>
 		</div>
 
-		<!--Modal de inisio sesion-->
+		<!--Modal de inicio sesion-->
 		<div id="modal-sesion" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">

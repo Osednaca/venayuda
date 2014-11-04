@@ -17,7 +17,7 @@ $indica_recipe				= $_REQUEST["indica_rec"]; //===> "0" No indica, "1" Si indica
 $fecha_ven 					= $_REQUEST["fecha_ven"];
 $descripcion 				= utf8_decode($_REQUEST["desc"]);
 $tipo_publicacion 			= $_REQUEST["tipo_publicacion"];
-$fecharegistro              = date("Y-m-d");
+$fecharegistro              = date("Y-m-d H:m:i");
 $idusuario                  = $_SESSION["idusuario"];
 
 //var_dump($_REQUEST);
@@ -53,7 +53,7 @@ $idusuario                  = $_SESSION["idusuario"];
         }
         else
         {
-            //echo "No Error"; exit();
+           // echo "No Error"; exit();
             $idmedicamento = $db->lastInsertId('public.medicamento_idmedicamento_seq');
         }
 	endif;
