@@ -27,7 +27,7 @@
 				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Buscar<span class="caret"></span>
 				  </a>
 				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="#" role="button">Donaciones publicadas</a></li>
+				    <li><a href="index.php?va=3" role="button">Donaciones publicadas</a></li>
 				    <li><a href="#" role="button">Abastecimiento de farmacias</a></li>
 				  </ul>
 				</li>

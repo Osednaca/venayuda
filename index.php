@@ -32,6 +32,9 @@
 	else if($_REQUEST["va"]==1){
 	    include("donacion/donacion.php");
 	}
+	else if($_REQUEST["va"]==3){
+	    include("publicacion/publicacion.php");
+	}
 	include("includes/menu.php");
  ?>
 </form>
