@@ -91,7 +91,7 @@
                                 <option value=""></option>
                                 <?php
                                 include_once("includes/config.php");
-                                $sql = "SELECT * FROM ciudades";
+                                $sql = "SELECT * FROM ciudades ORDER BY ciudad";
                                 foreach ($db->query($sql) as $row) {
                                 ?>
                                     <option value="<?= $row["id_ciudad"] ?>"><?= $row["ciudad"]; ?></option>
