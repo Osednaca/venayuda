@@ -20,7 +20,7 @@
     <script type="text/javascript" src="js/bootstrap-dialog.js"></script>
     <script type="text/javascript" src="js/bootstrap-select.js"></script>
     <script type="text/javascript" src="js/func.js"></script>
-	<title>.:VenAyuda:.</title>
+	<title>VenAyuda</title>
 </head>
 <body>
 <div id="wrap">
@@ -31,6 +31,10 @@
 	}
 	else if($_REQUEST["va"]==1){
 	    include("donacion/donacion.php");
+	}
+	else if($_REQUEST["va"]==2)
+	{
+		include("admin/publi_pend.php");
 	}
 	else if($_REQUEST["va"]==3){
 	    include("publicacion/publicacion.php");
