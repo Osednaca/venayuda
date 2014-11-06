@@ -1,0 +1,8 @@
+-- Column: fecharegistro
+
+
+-- ALTER TABLE publicacion DROP COLUMN fecharegistro;
+
+
+
+ALTER TABLE publicacion ADD COLUMN fecharegistro timestamp without time zone;
