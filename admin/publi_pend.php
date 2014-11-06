@@ -17,26 +17,58 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-12" style="text-align:center;">
-							<input type="button" class="btn btn-success" value="Buscar" onclick="buscar();">
-							<input type="button" class="btn btn-info" value="Ver todas">
+							<input type="button" class="btn btn-success" value="Buscar" onclick="buscar(1);">
+							<!-- <input type="button" class="btn btn-info" value="Ver todas" onclick="buscar(2);"> -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 </div>
-<div id="divDatos"></div>
+<div id="divDatos" style="width:100%;">
+	
+</div>
 <script type="text/javascript">
-function buscar()
+function buscar(tipo)
 {
-	if($("#tipo_publicacion").val()=="")
+	if(tipo==1)
 	{
-		$("#tipo_publicacion").popover("show");
-		return false;
+		if($("#tipo_publicacion").val()=="")
+		{
+			$("#tipo_publicacion").popover("show");
+			return false;
+		}	
+		var tipo_publicacion=$("#tipo_publicacion").val();	
 	}
-	var tipo_publicacion=$("#tipo_publicacion").val();
-	var accion = "busqueda_filtrada";
+	else
+	{
+		var tipo_publicacion="";
+		$("#tipo_publicacion").val("");	
+	}
 
-	$("#divDatos").load("admin/publi_pend_datos.php",{"tipo_publicacion":tipo_publicacion,"accion":accion});
+		$.blockUI({ css: { 
+		    border: 'none', 
+		    padding: '15px', 
+		    backgroundColor: '#000', 
+		    '-webkit-border-radius': '10px', 
+		    '-moz-border-radius': '10px', 
+		    opacity: .5, 
+		    color: '#fff' 
+		} }); 
+	
+	var accion = "busca_publicacion";
+
+	$("#divDatos").load("admin/publi_pend_datos.php",{"tipo_publicacion":tipo_publicacion,"accion":accion},function(){
+		setTimeout($.unblockUI);
+	});
+}
+
+function aprob_publi(idpublicacion)
+{
+	var accion="aprobar_publicacion";
+
+	$.post("admin/publi_pend_datos.php",{"idpublicacion":idpublicacion,"accion":accion},function(resp){
+		alert(resp);
+	})
 }
 </script>
