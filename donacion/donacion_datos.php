@@ -57,7 +57,7 @@ $foto4                      = ""; //$_REQUEST["foto4"];
             ?, ?, ?, ?, ?,?);";
         //echo $sql_medicamento; exit();
 		$query = $db->prepare($sql_medicamento);
-        $prepare = array($nombre_medicamento,$laboratorio_medicamento,$principio_a_medicamento,(int)$indica_recipe,$idusuario,$fecharegistro,1,$cant_uni);
+        $prepare = array($nombre_medicamento,$laboratorio_medicamento,$principio_a_medicamento,(int)$indica_recipe,$idusuario,$fecharegistro,0,$cant_uni);
         $result = $query->execute($prepare);
 
         if(!$result)
@@ -79,7 +79,7 @@ $foto4                      = ""; //$_REQUEST["foto4"];
             ?, ?, ?, ?, ?, ?,?,?,?);";
 		//echo $sql_publicacion; exit();
 		$query1 = $db->prepare($sql_publicacion);
-        $prepare1 = array($idusuario,(int)$id_medicamento,(int)$tipo_publicacion,$descripcion,$foto1,$foto2,$foto3,$foto4,1,$fecharegistro,$idfarmacia,$fecha_ven,(int)$idpresentacion,(int)$unidad_medicamento);
+        $prepare1 = array($idusuario,(int)$id_medicamento,(int)$tipo_publicacion,$descripcion,$foto1,$foto2,$foto3,$foto4,0,$fecharegistro,$idfarmacia,$fecha_ven,(int)$idpresentacion,(int)$unidad_medicamento);
         //var_dump($prepare); exit();
         $result1 = $query1->execute($prepare1);
         //var_dump(!$db->query($sql_publicacion)); exit();
