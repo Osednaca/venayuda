@@ -7,7 +7,7 @@ $idfarmacia = 0;
 if(empty($_REQUEST["id_medicamento"]))
     $id_medicamento         = "";
 else
-$id_medicamento 			= $_REQUEST["id_medicamento"]; //==> En caso de que el medicamento este en el select
+    $id_medicamento 		= $_REQUEST["id_medicamento"]; //==> En caso de que el medicamento este en el select
 
 /*---Si el medicamento no esta en el select estos campos deberian contener datos----*/
 $nombre_medicamento 		= utf8_decode($_REQUEST["nom_medicamento"]);
@@ -18,7 +18,7 @@ $principio_a_medicamento 	= utf8_decode($_REQUEST["pa_medicamento"]);
 if(empty($_REQUEST["pres_medicamento"]))
     $presentacion_medicamento="";
 else
-$presentacion_medicamento   = $_REQUEST["pres_medicamento"];           //==> Presentacion existente
+    $presentacion_medicamento= $_REQUEST["pres_medicamento"];           //==> Presentacion existente
 
 $new_presentacion           = utf8_decode($_REQUEST["new_present"]);   //==> Nueva presentacion
 
@@ -68,7 +68,7 @@ $foto4                      = ""; //$_REQUEST["foto4"];
         else
         {
            // echo "No Error"; exit();
-            $idmedicamento = $db->lastInsertId('public.medicamento_idmedicamento_seq');
+            $id_medicamento = $db->lastInsertId('public.medicamento_idmedicamento_seq');
         }
 	endif;
 
@@ -79,7 +79,7 @@ $foto4                      = ""; //$_REQUEST["foto4"];
             ?, ?, ?, ?, ?, ?,?,?,?);";
 		//echo $sql_publicacion; exit();
 		$query1 = $db->prepare($sql_publicacion);
-        $prepare1 = array($idusuario,(int)$idmedicamento,(int)$tipo_publicacion,$descripcion,$foto1,$foto2,$foto3,$foto4,1,$fecharegistro,$idfarmacia,$fecha_ven,(int)$idpresentacion,(int)$unidad_medicamento);
+        $prepare1 = array($idusuario,(int)$id_medicamento,(int)$tipo_publicacion,$descripcion,$foto1,$foto2,$foto3,$foto4,1,$fecharegistro,$idfarmacia,$fecha_ven,(int)$idpresentacion,(int)$unidad_medicamento);
         //var_dump($prepare); exit();
         $result1 = $query1->execute($prepare1);
         //var_dump(!$db->query($sql_publicacion)); exit();
