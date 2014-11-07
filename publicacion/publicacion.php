@@ -50,30 +50,31 @@
 		//echo $sql;
 		$query = $db->query($sql);
         $cuenta = $query->rowCount();
-        //echo $cuenta;
+        //echo "Cuenta: ".$cuenta;
 
 
 //break total records into pages
-$pages = ceil($cuenta/1);   
-
+$pages = ceil((int)$cuenta/5);   
+//echo "Paginas:".$pages;
 //create pagination
 $pagination = '';
 if($pages > 1)
 {	
 	$pagination .= '<nav>';
     $pagination .= '<ul class="pagination">';
-    for($i = 1; $i<$pages; $i++)
+    for($i = 1; $i<=$pages; $i++)
     {
+
         $pagination .= '<li><a href="#" class="paginate_click" id="'.$i.'-page">'.$i.'</a></li>';
     }
     $pagination .= '</ul>';
     $pagination .= '</nav>';
 }
-echo $pagination;
+echo "<div style='text-align: center;'>".$pagination."</div>";
                         ?>					
 					<div id="publicacion_data">
 					</div>
-
+<?php echo "<div style='text-align: center;'>".$pagination."</div>"; ?>
 				</div>
 			</div>
 		</div>
@@ -97,7 +98,7 @@ $(document).ready(function() {
         
         //post page number and load returned data into result element
         //notice (page_num-1), subtract 1 to get actual starting point
-        $("#publicacion_data").load("publicacion_datos.php", {'accion':'paginacion','page': (page_num-1)}, function(){
+        $("#publicacion_data").load("publicacion/publicacion_datos.php", {'accion':'paginacion','page': (page_num-1)}, function(){
 
         });
 
@@ -105,19 +106,28 @@ $(document).ready(function() {
         
         return false; //prevent going to herf link
     }); 
-    d
 });
 
 function buscar()
 {
-	if($("#tipo_publicacion").val()=="")
+	if($("#idciudad").val()=="")
 	{
-		$("#tipo_publicacion").popover("show");
+		$("#idciudad").popover("show");
 		return false;
 	}
-	var tipo_publicacion=$("#tipo_publicacion").val();
-	var accion = "busqueda_filtrada";
+	if($("#idmedicamento").val()=="")
+	{
+		$("#idmedicamento").popover("show");
+		return false;
+	}
+	var idmedicamento	=	$("#idmedicamento").val();
+	var idciudad 		= 	$("#idciudad").val();
+	var accion 			= "busqueda_filtrada";
 
 	$("#divDatos").load("publicacion/publicacion_datos.php",{"idciudad":idciudad,"accion":accion});
+}
+
+function ver_publicacion(idpublicacion){
+	$("#divDatos").load("publicacion/ver_publicacion.php",{"idpublicacion":idpublicacion,"accion":accion});
 }
 </script>

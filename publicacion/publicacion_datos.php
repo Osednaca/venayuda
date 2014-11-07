@@ -10,8 +10,23 @@ $accion = $_REQUEST["accion"];
 
 switch ($accion) {
 	case 'busqueda_filtrada':
-		$idciudad=$_REQUEST["idciudad"];
-		# code...
+		// Filtros
+		$idciudad		= $_REQUEST["idciudad"];
+		$idmedicamento 	= $_REQUEST["idmedicamento"];
+
+		$Filtros  	 = "";
+		$str_prepare = "";
+		if($idciudad!=""):
+			if($Filtros!=""): $Filtros .= " and "; endif;
+			$Filtros .= "idciudad = ?";
+			if($str_prepare!=""): $str_prepare .= ",".$idciudad; else: $str_prepare .= $idciudad; endif;
+		endif;
+		if($idmedicamento!=""):
+			if($Filtros!=""): $Filtros .= " and "; endif;
+			$Filtros .= "idmedicamento = ?";
+			if($str_prepare!=""): $str_prepare .= ",".$idmedicamento; else: $str_prepare .= $idmedicamento; endif;
+		endif;
+		if($Filtros!=""): $Filtros = "WHERE ".$Filtros; endif;
 		break;
 	case 'paginacion':
 		$item_per_page = 5;
@@ -35,7 +50,7 @@ switch ($accion) {
 			?>
 			<div style="float:left; width:200px;">
 			<?php
-			if(empty($medicamento["foto1"])):
+			if(!empty($medicamento["foto1"])):
 				$src = $medicamento["foto1"];
 			else:
 				$src = "img/medical.png";
@@ -46,7 +61,7 @@ switch ($accion) {
 			<div style="float:left; width:200px;">
 			<?php
 				echo "<p>".$medicamento["nombremedicamento"]."</p>";
-		    	echo "<p>".$medicamento["descripcion"]."</p>";
+		    	echo "<p><a onclick='ver_publicacion(".$medicamento["idpublicacion"].")' style='cursor: pointer;'>".$medicamento["descripcion"]."</a></p>";
 		    ?>
 		    </div>
 		    <?php
