@@ -2,7 +2,8 @@
 include_once("../includes/config.php");
 $idpublicacion = $_REQUEST["idpublicacion"];
 
-$sql 		 = "SELECT publicacion.*,medicamento.nombremedicamento FROM publicacion INNER JOIN medicamento USING(idpublicacion) WHERE idpublicacion=?";
+$sql 		 = "SELECT publicacion.*,medicamento.nombremedicamento FROM publicacion INNER JOIN medicamento USING(idmedicamento) WHERE idpublicacion=?";
+//echo $sql;
 $query 		 = $db->prepare($sql);
 $prepare 	 = array($idpublicacion);
 $result 	 = $query->execute($prepare);
@@ -66,7 +67,7 @@ endif;
 			echo "<p>".$Publicacion["descripcion"]."</p>";
 			if(!empty($Publicacion["fechavencimiento"])): "<p>Fecha de Vencimiento: ".$Publicacion["fechavencimiento"]."</p>"; endif;
 			?>
-			<input type="button" class="btn btn-success" value="Contactar" onclick="contacto(<?= $Publicacion["idpublicacion"] ?>);">
+			<input type="button" class="btn btn-success" value="Contactar" data-toggle="modal" data-target="modal-publi<?=$Publicacion["idpublicacion"]?>">
 										<!--Modal de descripcion de publicacion-->
 								<div id="modal-publi<?=$Publicacion["idpublicacion"]?>" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 								    <div class="modal-dialog modal-lg">
@@ -81,7 +82,7 @@ endif;
 										<div class="form-group" id="div_nm" style="display:;">
 										<label style="align:left;" class="col-sm-3 control-label">Mensaje:</label>
 										<div class="col-sm-6">
-											<textarea class="form-control"></textarea>
+											<textarea id="mensaje" name="mensaje" class="form-control"></textarea>
 										</div>
 									</div>
 													</div>
@@ -97,18 +98,12 @@ endif;
 		</div>
 	</div>
 </div>
-<div id="divDatos"></div>
 <script type="text/javascript">
-function buscar()
+function enviar_mensaje(idpublicacion)
 {
-	if($("#tipo_publicacion").val()=="")
-	{
-		$("#tipo_publicacion").popover("show");
-		return false;
-	}
-	var tipo_publicacion=$("#tipo_publicacion").val();
-	var accion = "busqueda_filtrada";
-
-	$("#divDatos").load("admin/publi_pend_datos.php",{"tipo_publicacion":tipo_publicacion,"accion":accion});
+	mensaje = $("#mensaje").val();
+	$.get("publicacion/ver_publicacion_datos.php",{"idpublicacion":idpublicacion,"mensaje":mensaje},function(data){
+		alert(data);
+	});
 }
 </script>

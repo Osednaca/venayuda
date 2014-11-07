@@ -1,0 +1,17 @@
+CREATE TABLE mensaje
+(
+  idmensaje serial NOT NULL,
+  idpublicacion integer NOT NULL,
+  idusuarioremitente integer,
+  idusuariodestinatario integer,
+  mensaje character varying(500),
+  estatus integer, -- 0 = No leido...
+  fecharegistro timestamp without time zone
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE mensaje
+  OWNER TO postgres;
+COMMENT ON COLUMN mensaje.estatus IS '0 = No leido
+1 = Leido';
