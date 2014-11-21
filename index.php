@@ -20,6 +20,9 @@
     <script type="text/javascript" src="js/bootstrap-dialog.js"></script>
     <script type="text/javascript" src="js/bootstrap-select.js"></script>
     <script type="text/javascript" src="js/func.js"></script>
+    <script type="text/javascript" src="js/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/ScrollToPlugin.min.js"></script>
+    <script type="text/javascript" src="js/smoothPageScroll.js"></script>
 	<title>VenAyuda</title>
 </head>
 <body>
