@@ -24,6 +24,7 @@ class Conn {
     //$config = parse_ini_file('/../'.$cfg_file);
     //$conf = array();
 
+<<<<<<< HEAD
 define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
 define('DB_PORT', getenv('OPENSHIFT_MYSQL_DB_PORT'));
 define('DB_USER', getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
@@ -33,6 +34,11 @@ define('DB_NAME', getenv('OPENSHIFT_GEAR_NAME'));
     $conf['user']    = DB_USER;
     $conf['pass']    = DB_PASS;
     $conf['dsn']     = 'pgsql:host='.DB_HOST.';dbname='.DB_NAME.';'; 
+=======
+    $conf['user']    = "postgres";
+    $conf['pass']    = "On.1953";
+    $conf['dsn']     = 'pgsql:host=localhost;dbname=venayuda_db;'; 
+>>>>>>> 5deb54f6c54b9b9299ae366e0f087c5f57db806a
 
     return $conf;
   }
